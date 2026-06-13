@@ -13,6 +13,7 @@ const output = resolve(root, "dist");
 const resolver = {
   name: "local-resolver",
   async resolveId(source, importer) {
+    if (!importer) return null;
     if (source.endsWith(".css")) return { id: resolve(dirname(importer), source), external: true };
     if (source.startsWith(".") || source.startsWith("/")) {
       const base = resolve(dirname(importer), source);
